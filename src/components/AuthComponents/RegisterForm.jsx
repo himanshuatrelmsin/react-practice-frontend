@@ -24,7 +24,7 @@ function RegisterForm() {
     try {
       const usernameValue = document.getElementById('username').value;
       const sanitizedUsername = usernameValue.replace(/[^a-zA-Z0-9]/g, "");
-      const response = await axios.post('http://localhost:3001/api_user/userVerification' , { username: sanitizedUsername } );
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}api_user/userVerification`, { username: sanitizedUsername } );
       if(response.status === 200){
         setVerifyUser("Verified");
         setVerifyDisable(true);
@@ -87,7 +87,7 @@ function RegisterForm() {
     onSubmit: async (values,  { resetForm }) => {
       try {
         const response = await axios.post(
-          "http://localhost:3001/api_user/userRegistration",
+          `${import.meta.env.VITE_BACKEND_URL}api_user/userRegistration`,
           values
         );
         if (response.status === 200) {
