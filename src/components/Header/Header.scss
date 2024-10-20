@@ -1,0 +1,7 @@
+.menu-horizontal {
+  & > li:not(.menu-title) {
+    & > details > ul {
+      z-index: 9;
+    }
+  }
+}
