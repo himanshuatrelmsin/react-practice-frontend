@@ -1,0 +1,21 @@
+.authDesign{
+    background-color: oklch(var(--pc));
+    .container{
+        background-size: cover;
+        background-position: center bottom;
+        .overlay{
+            background: linear-gradient(45deg, oklch(var(--bc)), transparent);
+        }
+        .authForm{
+            max-width: 800px;
+            .verifyUser {
+                position: absolute;
+                top: 0;
+                right: 0;
+                padding: 12px 22px;
+                background: #fff;
+                cursor: pointer;
+            }
+        }
+    }
+}
