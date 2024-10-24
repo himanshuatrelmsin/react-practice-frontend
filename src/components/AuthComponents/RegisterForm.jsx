@@ -7,7 +7,7 @@ import { useFormik } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
 import "./auth.scss";
-import { FiEye, FiEyeOff } from 'react-icons/fi';
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 function RegisterForm() {
   const [verifyUser, setVerifyUser] = useState("Verify");
@@ -16,7 +16,7 @@ function RegisterForm() {
   const [userError, setUserError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showCPassword, setShowCPassword] = useState(false);
-  const [successMessage, setSuccessMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState("");
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => setShowModal(true);
@@ -40,13 +40,17 @@ function RegisterForm() {
         setVerifyUser("Retry");
         setVerifyDisable(false);
         setSubmitDisable(true);
-        setUserError(<div className="text-red-600">Please try another username.</div>);
+        setUserError(
+          <div className="text-red-600">Please try another username.</div>
+        );
       }
     } catch (error) {
       setVerifyUser("Retry");
       setVerifyDisable(false);
       setSubmitDisable(true);
-      setUserError(<div className="text-red-600">Please try another username.</div>);
+      setUserError(
+        <div className="text-red-600">Please try another username.</div>
+      );
     }
   };
 
@@ -95,11 +99,11 @@ function RegisterForm() {
           values
         );
         if (response.status === 200) {
-          setSuccessMessage('Registration successful!');
+          setSuccessMessage("Registration successful!");
           resetForm();
           resetStates();
           setTimeout(() => {
-            setSuccessMessage(''); // Clear success message after 3 seconds
+            setSuccessMessage(""); // Clear success message after 3 seconds
           }, 3000);
         } else {
           console.error("Error submitting form data:", response.data);
@@ -129,7 +133,9 @@ function RegisterForm() {
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.name}
-        error={formik.touched.name && formik.errors.name ? formik.errors.name : null}
+        error={
+          formik.touched.name && formik.errors.name ? formik.errors.name : null
+        }
       />
       <Input
         type="tel"
@@ -145,7 +151,11 @@ function RegisterForm() {
         }}
         onBlur={formik.handleBlur}
         value={formik.values.number}
-        error={formik.touched.number && formik.errors.number ? formik.errors.number : null}
+        error={
+          formik.touched.number && formik.errors.number
+            ? formik.errors.number
+            : null
+        }
       />
       <Input
         type="email"
@@ -155,7 +165,11 @@ function RegisterForm() {
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.email}
-        error={formik.touched.email && formik.errors.email ? formik.errors.email : null}
+        error={
+          formik.touched.email && formik.errors.email
+            ? formik.errors.email
+            : null
+        }
       />
       <Input
         type="date"
@@ -164,7 +178,9 @@ function RegisterForm() {
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.dob}
-        error={formik.touched.dob && formik.errors.dob ? formik.errors.dob : null}
+        error={
+          formik.touched.dob && formik.errors.dob ? formik.errors.dob : null
+        }
       />
       <div className="relative">
         <Input
@@ -175,7 +191,11 @@ function RegisterForm() {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.username}
-          error={formik.touched.username && formik.errors.username ? formik.errors.username : null}
+          error={
+            formik.touched.username && formik.errors.username
+              ? formik.errors.username
+              : null
+          }
           disabled={verifyDisable}
           usernameerror={userError}
         />
@@ -187,7 +207,7 @@ function RegisterForm() {
           {verifyUser}
         </Button>
       </div>
-      <div className='relative'>
+      <div className="relative">
         <Input
           type={showPassword ? "text" : "password"}
           name="password"
@@ -196,17 +216,24 @@ function RegisterForm() {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.password}
-          error={formik.touched.password && formik.errors.password ? formik.errors.password : null}
+          onCopy={(e) => e.preventDefault()} // Disable copy
+          onPaste={(e) => e.preventDefault()} // Disable paste
+          onCut={(e) => e.preventDefault()} // Disable cut
+          error={
+            formik.touched.password && formik.errors.password
+              ? formik.errors.password
+              : null
+          }
         />
         <button
           type="button"
-          className="absolute right-2 top-[18px]"
-          onClick={() => setShowPassword(prev => !prev)}
+          className="absolute right-2 top-[18px] text-white"
+          onClick={() => setShowPassword((prev) => !prev)}
         >
           {showPassword ? <FiEyeOff /> : <FiEye />}
         </button>
       </div>
-      <div className='relative'>
+      <div className="relative">
         <Input
           type={showCPassword ? "text" : "password"}
           name="cpassword"
@@ -215,12 +242,19 @@ function RegisterForm() {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.cpassword}
-          error={formik.touched.cpassword && formik.errors.cpassword ? formik.errors.cpassword : null}
+          onCopy={(e) => e.preventDefault()} // Disable copy
+          onPaste={(e) => e.preventDefault()} // Disable paste
+          onCut={(e) => e.preventDefault()} // Disable cut
+          error={
+            formik.touched.cpassword && formik.errors.cpassword
+              ? formik.errors.cpassword
+              : null
+          }
         />
         <button
           type="button"
-          className="absolute right-2 top-[18px]"
-          onClick={() => setShowCPassword(prev => !prev)}
+          className="absolute right-2 top-[18px] text-white"
+          onClick={() => setShowCPassword((prev) => !prev)}
         >
           {showCPassword ? <FiEyeOff /> : <FiEye />}
         </button>
@@ -241,12 +275,20 @@ function RegisterForm() {
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         checked={formik.values.terms}
-        error={formik.touched.terms && formik.errors.terms ? formik.errors.terms : null}
+        error={
+          formik.touched.terms && formik.errors.terms
+            ? formik.errors.terms
+            : null
+        }
       />
       <Button type="submit" className="mt-8" disabled={submitDisable}>
         Submit
       </Button>
-      {successMessage && <div className="text-green-600 text-center font-[100px] z-index[999] relative mt-4">{successMessage}</div>}
+      {successMessage && (
+        <div className="text-green-600 text-center font-[100px] z-index[999] relative mt-4">
+          {successMessage}
+        </div>
+      )}
       <TermsCondition
         showModal={showModal}
         setShowModal={setShowModal}

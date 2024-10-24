@@ -6,6 +6,7 @@ import Dharampal from './dharampal/pages/register/Register';
 import Sunil from './sunil/pages/register';
 import About from './Pages/About';
 import Contact from './Pages/Contact';
+import AddProduct from './Pages/Products/AddProduct';
 import Home from './Pages/Home';
 import Footer from './components/Footer';
 import Login from './Pages/AuthPages/Login';
@@ -22,6 +23,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/products" element={<AddProduct />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/dharampal" element={<Dharampal />} />
