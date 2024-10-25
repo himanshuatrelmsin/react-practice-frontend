@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Input from "../Input";
 import InputChecks from "../Input/InputChecks";
 import Button from "../Button";
@@ -21,38 +21,6 @@ function RegisterForm() {
 
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
-
-  const verifyUsername = async (e) => {
-    e.preventDefault();
-    try {
-      const usernameValue = document.getElementById("username").value.trim();
-      const sanitizedUsername = usernameValue.replace(/[^a-zA-Z0-9]/g, "");
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}api_user/userVerification`,
-        { username: sanitizedUsername }
-      );
-      if (response.status === 200) {
-        setVerifyUser("Verified");
-        setVerifyDisable(true);
-        setSubmitDisable(false);
-        setUserError(<div className="text-white">Username is available.</div>);
-      } else {
-        setVerifyUser("Retry");
-        setVerifyDisable(false);
-        setSubmitDisable(true);
-        setUserError(
-          <div className="text-red-600">Please try another username.</div>
-        );
-      }
-    } catch (error) {
-      setVerifyUser("Retry");
-      setVerifyDisable(false);
-      setSubmitDisable(true);
-      setUserError(
-        <div className="text-red-600">Please try another username.</div>
-      );
-    }
-  };
 
   const validationSchema = Yup.object({
     name: Yup.string()
@@ -121,6 +89,49 @@ function RegisterForm() {
     setUserError("");
   };
 
+  // Auto verification on username change
+  useEffect(() => {
+    if (formik.values.username.trim().length > 0) {
+      const timer = setTimeout(() => {
+        verifyUsername();
+      }, 2000);
+
+      return () => clearTimeout(timer); // Clear timeout if user types before 2 seconds
+    }
+  }, [formik.values.username]);
+
+  const verifyUsername = async () => {
+    try {
+      const sanitizedUsername = formik.values.username
+        .trim()
+        .replace(/[^a-zA-Z0-9]/g, "");
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}api_user/userVerification`,
+        { username: sanitizedUsername }
+      );
+      if (response.status === 200) {
+        setVerifyUser("Verified");
+        setVerifyDisable(true);
+        setSubmitDisable(false);
+        setUserError(<div className="text-white">Username is available.</div>);
+      } else {
+        setVerifyUser("Retry");
+        setVerifyDisable(false);
+        setSubmitDisable(true);
+        setUserError(
+          <div className="text-red-600">Please try another username.</div>
+        );
+      }
+    } catch (error) {
+      setVerifyUser("Retry");
+      setVerifyDisable(false);
+      setSubmitDisable(true);
+      setUserError(
+        <div className="text-red-600">Please try another username.</div>
+      );
+    }
+  };
+
   const isUsernameValid = formik.values.username.trim().length > 0;
 
   return (
@@ -146,8 +157,13 @@ function RegisterForm() {
         pattern="\d*"
         onChange={(e) => {
           const { value } = e.target;
+          // Remove any non-numeric characters
           const numericValue = value.replace(/\D/g, "");
-          formik.setFieldValue("number", numericValue);
+
+          // Set the value only if it's 10 digits or less
+          if (numericValue.length <= 10) {
+            formik.setFieldValue("number", numericValue);
+          }
         }}
         onBlur={formik.handleBlur}
         value={formik.values.number}
@@ -199,13 +215,6 @@ function RegisterForm() {
           disabled={verifyDisable}
           usernameerror={userError}
         />
-        <Button
-          className="text-dark showPass verifyUser"
-          disabled={!isUsernameValid}
-          onClick={verifyUsername}
-        >
-          {verifyUser}
-        </Button>
       </div>
       <div className="relative">
         <Input
