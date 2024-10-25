@@ -1,0 +1,15 @@
+.add-product-form {
+    .inputField {
+        input {
+            border: 1px solid #333;
+            border-bottom: 1px solid #333;
+            color: black;
+            &::placeholder {
+                color: black;
+            }
+        }
+    }
+}
+.h-48 {
+    height: 48px !important;
+}
