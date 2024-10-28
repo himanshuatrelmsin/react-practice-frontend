@@ -27,14 +27,14 @@ function Header() {
               <li><Link to="/">Home</Link></li>
               <li><Link to="/about">About</Link></li>
               <li><Link to="/contact">Contact</Link></li>
-              <li><Link to="/products">Add Product</Link></li>
-
               {user ? (
-                <li>
+                <li >
                   <details>
                     <summary>Profile</summary>
-                    <ul className="bg-base-100 rounded-t-none p-2">
-                      <li><Link to="/profile">{user.username}</Link></li>
+                    <ul className="bg-base-100 rounded-t-none p-2 right-0">
+                      <li className='px-3 py-2'>Hello! {user.username}</li>
+                      <li><Link to="/address">Shipping & Billing Address </Link></li>
+                      <li><Link to="/profile">Account Details</Link></li>
                       <li><button onClick={handleLogout}>Logout</button></li>
                     </ul>
                   </details>
