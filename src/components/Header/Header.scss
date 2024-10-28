@@ -2,6 +2,12 @@
   & > li:not(.menu-title) {
     & > details > ul {
       z-index: 9;
+      li{
+        white-space: nowrap;
+        a{
+          white-space: nowrap;
+        }
+      }
     }
   }
 }
