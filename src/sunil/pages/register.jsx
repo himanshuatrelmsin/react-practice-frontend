@@ -6,7 +6,7 @@ const Register = () => {
     username: '',
     email: '',
     password: '',
-    cpassword: '',
+    cpassword: '', 
   });
   const [errors, setErrors] = useState({});
   const [apiError, setApiError] = useState('');
