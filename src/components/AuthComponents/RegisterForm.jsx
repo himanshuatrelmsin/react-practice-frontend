@@ -18,6 +18,7 @@ function RegisterForm() {
   const [showCPassword, setShowCPassword] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [showToast, setShowToast] = useState(true);
 
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
@@ -72,7 +73,7 @@ function RegisterForm() {
           resetStates();
           setTimeout(() => {
             setSuccessMessage(""); // Clear success message after 3 seconds
-          }, 3000);
+          }, 5000);
         } else {
           console.error("Error submitting form data:", response.data);
         }
@@ -294,10 +295,14 @@ function RegisterForm() {
         Submit
       </Button>
       {successMessage && (
-        <div className="text-green-600 text-center font-[100px] z-index[999] relative mt-4">
+        <div className="flex gap-4 items-center justify-between bg-green-600 text-white font-500 text-base px-4 py-3 rounded-lg shadow-lg absolute top-[68px] right-0 z-50 max-w-xs">
           {successMessage}
+          <button className="text-xl" onClick={() => setShowToast(false)}>
+            &times;
+          </button>
         </div>
       )}
+
       <TermsCondition
         showModal={showModal}
         setShowModal={setShowModal}
