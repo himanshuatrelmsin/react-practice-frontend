@@ -8,7 +8,7 @@ const Register = () => {
     password: '',
     cpassword: '', 
   });
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({}); 
   const [apiError, setApiError] = useState('');
 
   const handleChange = (e) => {
