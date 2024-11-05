@@ -36,10 +36,10 @@ function Header() {
                   <details>
                     <summary>Profile</summary>
                     <ul className="bg-base-100 rounded-t-none p-2 right-0">
-                      <li className='px-3 py-2'>Hello! {user.username}</li>
+                      <li className='px-4 py-2'>Hello! {user.username}</li>
                       <li><Link to="/address" onClick={closeDropdown}>Shipping & Billing Address </Link></li>
                       <li><Link to="/profile" onClick={closeDropdown}>Account Details</Link></li>
-                      <li><button onClick = {() => {handleLogout; closeDropdown;}}>Logout</button></li>
+                      <li><button onClick={() => { handleLogout(); closeDropdown(); }}>Logout</button></li>
                     </ul>
                   </details>
                 </li>
