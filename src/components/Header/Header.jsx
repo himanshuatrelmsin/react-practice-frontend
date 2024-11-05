@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Header.scss';
 import { UserContext } from '../../UserContext';
@@ -7,6 +7,10 @@ function Header() {
   const navigate = useNavigate();
 
   const { user, setUser } = useContext(UserContext);  
+
+  const closeDropdown = () => {
+    setDropdownOpen(false);
+  };
 
   const handleLogout = () => {
     localStorage.removeItem('user');
@@ -33,19 +37,19 @@ function Header() {
                     <summary>Profile</summary>
                     <ul className="bg-base-100 rounded-t-none p-2 right-0">
                       <li className='px-3 py-2'>Hello! {user.username}</li>
-                      <li><Link to="/address">Shipping & Billing Address </Link></li>
-                      <li><Link to="/profile">Account Details</Link></li>
-                      <li><button onClick={handleLogout}>Logout</button></li>
+                      <li><Link to="/address" onClick={closeDropdown}>Shipping & Billing Address </Link></li>
+                      <li><Link to="/profile" onClick={closeDropdown}>Account Details</Link></li>
+                      <li><button onClick = {() => {handleLogout; closeDropdown;}}>Logout</button></li>
                     </ul>
                   </details>
                 </li>
               ) : (
                 <li>
-                  <details>
+                  <details  >
                     <summary>Profile</summary>
                     <ul className="bg-base-100 rounded-t-none p-2">
-                      <li><Link to="/login">Login</Link></li>
-                      <li><Link to="/register">Register</Link></li>
+                      <li><Link to="/login" onClick={closeDropdown}>Login</Link></li>
+                      <li><Link to="/register" onClick={closeDropdown}>Register</Link></li>
                     </ul>
                   </details>
                 </li>
