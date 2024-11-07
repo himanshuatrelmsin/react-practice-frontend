@@ -67,6 +67,7 @@ function RegisterForm() {
           `${import.meta.env.VITE_BACKEND_URL}api_user/userRegistration`,
           values
         );
+
         if (response.status === 200) {
           setSuccessMessage("Registration successful!");
           resetForm();
@@ -92,6 +93,7 @@ function RegisterForm() {
 
   // Auto verification on username change
   useEffect(() => {
+    console.log(formik.values);
     if (formik.values.username.trim().length > 0) {
       const timer = setTimeout(() => {
         verifyUsername();
