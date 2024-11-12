@@ -13,16 +13,7 @@ import Login from "./Pages/AuthPages/Login";
 import Register from "./Pages/AuthPages/Register";
 import { UserProvider } from "./UserContext";
 import UserDetails from "./Pages/UserDetails";
-
-const data = [
-  {
-    userId: "6f487228-9b78-4946-a784-5554882016ff",
-    name: "Himanshu Atre",
-    email: "himanshuatre088@gmail.com",
-    dob: "1999-01-30T00:00:00.000Z",
-  },
-  // Add more data as needed
-];
+import Profile from "./Pages/ProfileUpdate";
 
 function App() {
   return (
@@ -35,6 +26,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/products" element={<AddProduct />} />
           <Route path="/user-details" element={<UserDetails />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/dharampal" element={<Dharampal />} />

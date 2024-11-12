@@ -36,6 +36,7 @@ function LoginForm() {
         );
         if (response.status === 200) {
           const user = response.data.user;
+          console.log(user)
           const loginTimestamp = new Date().getTime();
           localStorage.setItem("user", JSON.stringify(user));
           localStorage.setItem("loginTimestamp", loginTimestamp);
